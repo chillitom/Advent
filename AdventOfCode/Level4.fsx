@@ -30,9 +30,13 @@ let computeCoin (i:int) =
         |> Seq.toArray 
     String.Join("", hexPairs)
 
-let rec findZeros i =
+let rec findZeros i start =
     let hash = computeCoin i
-    if hash.StartsWith("00000") then
+    if hash.StartsWith(start) then
         i
     else
-        findZeros (i + 1)
+        findZeros (i + 1) start
+
+let answer1 = findZeros 0 "00000"
+
+let answer2 = findZeros 0 "000000"

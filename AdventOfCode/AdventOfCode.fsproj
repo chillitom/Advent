@@ -53,5 +53,9 @@
     <None Include="Level3.fsx" />
     <None Include="Level4.fsx" />
     <None Include="Level5.fsx" />
+    <None Include="Input\level3.txt" />
+    <None Include="Input\level5.txt" />
+    <None Include="Input\level6.txt" />
+    <None Include="Level6.fsx" />
   </ItemGroup>
 </Project>
