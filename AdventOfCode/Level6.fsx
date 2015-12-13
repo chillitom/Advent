@@ -25,36 +25,46 @@ turn off 499,499 through 500,500 would turn off (or leave off) the middle four l
 After following the instructions, how many lights are lit?
 *)
 
-let row i = [0..999] |> Seq.map (fun _ -> false)
-let lights = [0..999] |> Seq.map row
+let makeGrid length height value =
+    let row i = [0..(length-1)] |> Seq.map (fun _ -> value)
+    [0..(height-1)] |> Seq.map row
+ 
+let lights = makeGrid 1000 1000 false
 
-let turnOn x = true
-let turnOff x = false
-let toggle x = not x
+type Grid = int * int * int * int
+type Action = TurnOn | TurnOff | Toggle
+type Instruction = Action * Grid
 
 let parse i =
     let m = Regex.Match(i, @"(?<instruction>turn on|toggle|turn off) (?<x1>\d+),(?<y1>\d+) through (?<x2>\d+),(?<y2>\d+)")
     let get (s:string) = m.Groups.[s].Value |> Convert.ToInt32
-    let instruction = 
-        match m.Groups.["instruction"].Value with
-        | "turn on" -> turnOn
-        | "turn off" -> turnOff
-        | "toggle" -> toggle
-        | _ -> failwith i
-    (instruction, get "x1", get "y1", get "x2", get "y2")
+    let grid = get "x1", get "y1", get "x2", get "y2"
+    match m.Groups.["instruction"].Value with
+    | "turn on" -> TurnOn, grid
+    | "turn off" -> TurnOff, grid
+    | "toggle" -> Toggle, grid
+    | _ -> failwith i
 
 let instructions = input |> Seq.map parse
 
-let updateRow (f,x1,_,x2,_) row =
-    row |> Seq.mapi (fun x v -> if x >= x1 && x <= x2 then f v else v)
+let updateRow f (action,(x1,_,x2,_)) row =
+    row |> Seq.mapi (fun x v -> if x >= x1 && x <= x2 then f action v else v)
 
-let updateLights lights ((_,_,y1,_,y2) as i) =
-    lights |> Seq.mapi (fun y r -> if y >= y1 && y <= y2 then updateRow i r else r)
+let updateLights f lights ((_,(_,y1,_,y2)) as i) =
+    lights |> Seq.mapi (fun y r -> if y >= y1 && y <= y2 then updateRow f i r else r)
 
-let lightsAfterUpdate =
-    instructions |> Seq.fold updateLights lights
+let updateLight action value = 
+    match action with
+    | TurnOn -> true
+    | TurnOff -> false
+    | Toggle -> not value
 
-let answer1 = lightsAfterUpdate |> Seq.collect id |> Seq.filter id |> Seq.length
+let answer1 = 
+    instructions 
+    |> Seq.fold (updateLights updateLight) lights 
+    |> Seq.collect id 
+    |> Seq.filter id 
+    |> Seq.length
 
 (*
 --- Part Two ---
@@ -77,3 +87,18 @@ turn on 0,0 through 0,0 would increase the total brightness by 1.
 toggle 0,0 through 999,999 would increase the total brightness by 2000000.
 
 *)
+
+let updateLight2 action value = 
+    match action with
+    | TurnOn -> value + 1
+    | TurnOff -> max (value - 1) 0
+    | Toggle -> value + 2
+
+let lights2 = makeGrid 1000 1000 0
+
+let answer2 = 
+    instructions 
+    |> Seq.fold (updateLights updateLight2) lights2 
+    |> Seq.collect id 
+    |> Seq.sum
+
