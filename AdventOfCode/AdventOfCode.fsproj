@@ -66,5 +66,7 @@
     <None Include="Level7.fsx" />
     <None Include="packages.config" />
     <None Include="Input\level7.txt" />
+    <None Include="Input\level8.txt" />
+    <None Include="Level8.fsx" />
   </ItemGroup>
 </Project>
