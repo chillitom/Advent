@@ -3,7 +3,6 @@
 
 open Helper
 open System
-open System.Text.RegularExpressions
 
 let input = loadLines "level7.txt"
 
@@ -60,11 +59,6 @@ and Circuit =
     | RShift of WireRef * int
     | Not of WireRef
 
-let (|Regex|_|) pattern input =
-    let m = Regex.Match(input, pattern)
-    if m.Success 
-    then Some(List.tail [for g in m.Groups -> g.Value])
-    else None
 
 let parse line = 
     match line with

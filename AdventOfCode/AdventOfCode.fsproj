@@ -15,20 +15,17 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
-    <PlatformTarget>
-    </PlatformTarget>
+    <PlatformTarget></PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
     <GenerateTailCalls>true</GenerateTailCalls>
-    <PlatformTarget>
-    </PlatformTarget>
+    <PlatformTarget></PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -64,9 +61,11 @@
     <None Include="Input\level6.txt" />
     <None Include="Level6.fsx" />
     <None Include="Level7.fsx" />
+    <None Include="Level8.fsx" />
+    <None Include="Level9.fsx" />
     <None Include="packages.config" />
     <None Include="Input\level7.txt" />
     <None Include="Input\level8.txt" />
-    <None Include="Level8.fsx" />
+    <None Include="Input\level9.txt" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,6 @@
 #load "Helper.fsx"
 
 open Helper
-open System
-open System.Text.RegularExpressions
 open FParsec
 
 let input = loadLines "level8.txt"
