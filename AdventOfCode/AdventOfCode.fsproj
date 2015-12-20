@@ -36,6 +36,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="FParsec">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
@@ -57,5 +63,8 @@
     <None Include="Input\level5.txt" />
     <None Include="Input\level6.txt" />
     <None Include="Level6.fsx" />
+    <None Include="Level7.fsx" />
+    <None Include="packages.config" />
+    <None Include="Input\level7.txt" />
   </ItemGroup>
 </Project>
